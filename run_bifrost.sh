@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get the container host's IP
-LOCALIP = $(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+export LOCALIP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4 2> /dev/null)
 
 # upsert a DNS record for the IP using the name we have been given in the specified hosted zone
 
@@ -32,4 +32,4 @@ aws route53 change-resource-record-sets --hosted-zone-id $AWS_HOSTED_ZONE_ID \
 # substitute 
 envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf
 
-nginx -g 'daemon off';
+nginx -g 'daemon off;'

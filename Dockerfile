@@ -19,5 +19,6 @@ RUN mkdir -p /var/log/nginx && \
 COPY nginx.conf /etc/nginx/conf.d/mysite.template
 
 COPY run_bifrost.sh /
+RUN chmod +x /run_bifrost.sh
 
 CMD /run_bifrost.sh
