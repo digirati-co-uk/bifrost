@@ -14,3 +14,30 @@ Bifrost is a proxy container that self-registers the underlying AWS EC2 instance
 | LISTEN_PORT             | Port for the proxy to listen on          | 80      |
 | PROXY\_TARGET_HOST      | Target hostname                          |         |
 | PROXY\_TARGET_PORT      | Target port                              |         |
+
+The AWS user will need the following permissions:
+
+```
+{
+    "Statement": [
+        {
+            "Action": [
+                "route53:GetHostedZone"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Action": [
+                "route53:ChangeResourceRecordSets"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:route53:::hostedzone/<YOUR HOSTED ZONE ID>"
+            ]
+        },
+    ]
+}
+```
