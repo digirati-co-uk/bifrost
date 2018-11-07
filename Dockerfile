@@ -1,24 +1,15 @@
-from nginx
+from alpine:3.6
 
-ENV AWS_ACCESS_KEY_ID setme
-ENV AWS_SECRET_ACCESS_KEY setme
-ENV AWS_REGION setme
-ENV LISTEN_PORT 80
-ENV PROXY_TARGET_HOST setme
-ENV PROXY_TARGET_PORT setme
-ENV AWS_HOSTED_ZONE_ID setme
-ENV AWS_ROUTE53_HOSTNAME setme
+ENV AWS_REGION default
+ENV AWS_HOSTED_ZONE_ID default
+ENV AWS_ROUTE53_HOSTNAME default
 
-RUN apt-get update -y && apt-get install -y python-pip
+RUN apk add --update --no-cache --virtual=run-deps \
+  python3 \
+  ca-certificates
 RUN pip install awscli
 
-RUN mkdir -p /var/log/nginx && \
-    ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stdout /var/log/nginx/error.log
+CMD /run.sh
 
-COPY nginx.conf /etc/nginx/conf.d/mysite.template
-
-COPY run_bifrost.sh /
-RUN chmod +x /run_bifrost.sh
-
-CMD /run_bifrost.sh
+COPY run.sh /
+RUN chmod +x /run.sh

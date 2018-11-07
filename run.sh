@@ -29,7 +29,4 @@ EOFCAT
 aws route53 change-resource-record-sets --hosted-zone-id $AWS_HOSTED_ZONE_ID \
   --change-batch file:///tmp/route53-record.txt --region $AWS_REGION
 
-# substitute 
-envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf
-
-nginx -g 'daemon off;'
+while :;do sleep 10; done
