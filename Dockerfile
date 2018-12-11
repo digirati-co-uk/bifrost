@@ -5,6 +5,7 @@ RUN apk add --update --no-cache --virtual=run-deps \
   nginx \
   ca-certificates \
   gettext \
+  curl \
   && python3 -m ensurepip --upgrade
 
 ENV LISTEN_PORT 80
