@@ -15,6 +15,7 @@ ENV AWS_HOSTED_ZONE_ID setme
 ENV AWS_ROUTE53_HOSTNAME setme
 
 RUN mkdir -p /var/log/nginx && \
+    mkdir -p /run/nginx && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stdout /var/log/nginx/error.log
 
